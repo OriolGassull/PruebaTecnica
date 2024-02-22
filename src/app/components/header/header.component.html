@@ -1,0 +1,36 @@
+<header class="containerHeader">
+  <div class="bg1"></div>
+  <div class="bg2"></div>
+  <div class="blackScreen"></div>
+  <div class="headerBody">
+    <img src="assets/img/tituloBG.png">
+    <div class="searcherTarjeta">
+      <button (click)="searchCharacters()"><i class="pi pi-search"></i></button>
+      <input type="text" placeholder="Buscar personaje..." [(ngModel)]="searchTerm" />
+      <button><i class="pi pi-sliders-h"></i></button>
+    </div>
+    <div class="filtersSearch">
+      <b>Filtros aplicados: </b>
+      <p class="m-0">Status, Origin</p>
+    </div>
+  </div>
+</header>
+<nav>
+  <ul>
+    <li (click)="seleccionarCategoria('All')" [ngClass]="{'activeTab': tabValue == 'All'}">
+      <span>All</span>
+    </li>
+    <li (click)="seleccionarCategoria('Unknow')" [ngClass]="{'activeTab': tabValue == 'Unknow'}">
+      <span>Unknow</span>
+    </li>
+    <li (click)="seleccionarCategoria('Female')" [ngClass]="{'activeTab': tabValue == 'Female'}">
+      <span>Female</span>
+    </li>
+    <li (click)="seleccionarCategoria('Male')" [ngClass]="{'activeTab': tabValue == 'Male'}">
+      <span>Male</span>
+    </li>
+    <li (click)="seleccionarCategoria('Genderless')" [ngClass]="{'activeTab': tabValue == 'Genderless'}">
+      <span>Genderless</span>
+    </li>
+  </ul>
+</nav>

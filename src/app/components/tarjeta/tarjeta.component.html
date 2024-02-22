@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="showFavorites">
+        <h3> Mostrar favoritos: </h3>
+        <div class="circle" (click)="filterFavorites()">
+            <i class="pi pi-star-fill" [ngClass]="{'activeFav': favoriteButton}"></i>
+        </div>
+    </div>
+
+    <div class="girdListCharacters">
+        <div class="cardBody" *ngFor="let char of characters">
+            <div class="imageCard">
+                <div class="circle circleCard" (click)="filterFavorites()">
+                    <i class="pi pi-star-fill" [ngClass]="{'activeFav': favoriteButton}"></i>
+                </div>
+            </div>
+            <div class="infoCard">
+                <span class="m-0 text-xs text-500">Alive-Human</span>
+                <h2 class="m-0 mb-1 text-base">Morty Smith</h2>
+
+                <span class="text-xs text-400">Last know location:</span>
+                <p class="m-0 mb-1 text-sm">Story Train</p>
+
+                <span class="text-xs text-400">First seen in:</span>
+                <p class="m-0 text-sm">Never Ricking Morty</p>
+            </div>
+        </div>
+    </div>
+</div>

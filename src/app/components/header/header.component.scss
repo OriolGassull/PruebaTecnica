@@ -1,0 +1,221 @@
+.containerHeader {
+    height: 580px;
+    position: relative;
+}
+
+.bg1 {
+    background-image: url(../../../assets/img/headerBG.png);
+    height: inherit;
+    background-position: 50% 53%;
+    background-repeat: no-repeat;
+    background-size: 105%;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+.bg2 {
+    background-image: url(../../../assets/img/headerBG2.png);
+    height: inherit;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.blackScreen {
+    width: 100%;
+    height: 580px;
+    background-color: black;
+    position: absolute;
+    opacity: 0.4;
+    z-index: 3;
+}
+
+.headerBody {
+    z-index: 4;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: inherit;
+
+    img {
+        width: 400px;
+    }
+
+    .searcherTarjeta {
+        display: flex;
+        width: 500px;
+        height: 60px;
+        border-radius: 6px;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        margin-top: 35px;
+        margin-bottom: 15px;
+
+        button {
+            background-color: #081f32;
+            border: 0;
+            height: 55px;
+            width: 60px;
+            cursor: pointer;
+            color: white;
+
+            &:hover {
+               opacity: 0.95;
+            }
+
+            &:first-child {
+                border-top-left-radius: 6px;
+                border-bottom-left-radius: 6px;
+                margin-left: 2.5px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+                margin-right: 2.5px;
+            }
+
+            i {
+                font-size: 1.6rem;
+            }
+        }
+
+        input {
+            width: 100%;
+            background-color: #081f32;
+            height: 55px;
+            border: 0;
+            outline: none;
+            padding-left: 10px;
+            color: #fff;
+            font-size: 1.2rem;
+
+            &::placeholder {
+                color: #e2e2e2;
+            }
+        }
+    }
+
+    .filtersSearch {
+        width: 500px;
+        min-height: 33px;
+        padding: 5px 15px;
+        background-color: #fff;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        b {
+            color: #34c759;
+            white-space: nowrap;
+        }
+
+        p {
+        }
+    }
+}
+
+nav {
+    width: 100%;
+    height: 80px;
+    background-color: #f2f2f2;
+    overflow: auto;
+
+    ul {
+        margin: 0 auto;
+        display: flex;
+        list-style: none;
+        padding: 0;
+        width: 70%;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+
+        li {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            min-width: 115px;
+
+            &:hover:not(.activeTab) {
+                border-bottom: 3px solid #34c7594f;
+            }
+        }
+
+        .activeTab {
+            border-bottom: 3px solid #34c759;
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .containerHeader,
+    .blackScreen {
+        height: 480px;
+    }
+
+    .headerBody {
+        img {
+            width: 300px;
+        }
+
+        .searcherTarjeta,
+        .filtersSearch {
+            width: 350px;
+        }
+    }
+
+    nav ul {
+        width: 100%;
+
+        li {
+            border-right: 1px solid gainsboro;
+
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+}
+
+@media only screen and (max-width: 370px) {
+    .headerBody {
+        img {
+            width: 300px;
+        }
+
+        .searcherTarjeta,
+        .filtersSearch {
+            width: 300px;
+        }
+    }
+
+    nav ul {
+        width: 100%;
+
+        li {
+            border-right: 1px solid gainsboro;
+
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+}

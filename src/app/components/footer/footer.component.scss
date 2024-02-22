@@ -1,0 +1,22 @@
+#containerFooter {
+    height: 150px;
+    position: relative;
+    background-color: #082032;
+}
+
+#bg1 {
+    background-image: url(../../../assets/img/footerBG.png);
+    height: inherit;
+    background-position: 0 17%;
+    background-repeat: no-repeat;
+    background-size: 105%;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+@media only screen and (max-width: 370px) {
+    #containerFooter {
+        height: 50px;
+    }
+}

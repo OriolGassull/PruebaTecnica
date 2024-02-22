@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TarjetaService } from './services/tarjeta.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'projectTest';
+  characters: any[] = [];
+
+  constructor(private apiService: TarjetaService) { }
+
+  searchCharacters(searchTerm: string) {
+    this.characters = this.apiService.getCharacters(searchTerm);
+    console.log(this.characters)
+  }
 }
