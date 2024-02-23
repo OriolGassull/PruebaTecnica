@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,17 @@ import { Observable } from 'rxjs';
 
 export class TarjetaService {
   constructor(private http: HttpClient) {}
-  private characterList: string[] = ['Personaje 1', 'Personaje 2', 'Personaje 3', 'Personaje 4', 'Personaje 5', 'Personaje 6', 'Personaje 7'];
   apiUrl: string = 'https://rickandmortyapi.com/api/'
+  private sharedVar = new BehaviorSubject<boolean>(false);
 
-  // getCharacters(data: string): string[] {
-  //   const dataFilter = [] as string[];
+  getSharedVar() {
+    return this.sharedVar.asObservable();
+  }
 
-  //   this.characterList.forEach(element => {
-  //     if (element.includes(data) || data == 'All') {
-  //       dataFilter.push(element);
-  //     }
-  //   });
-  //   return dataFilter;
-  // }
-
+  setSharedVar(newValue: boolean) {
+    this.sharedVar.next(newValue);
+  }
+  
   getCharacters(filtro: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}character` + filtro);
   }

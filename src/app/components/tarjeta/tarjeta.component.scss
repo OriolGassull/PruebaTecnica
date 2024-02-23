@@ -4,6 +4,7 @@
     margin-top: 40px;
     margin-bottom: 40px;
     width: 70%;
+    min-height: 70vh;
 }
 
 @media only screen and (max-width: 800px) {
@@ -16,7 +17,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(326px, 1fr));
     gap: 15px;
-    min-height: 70vh;
 }
 
 .clearFilters {
@@ -27,6 +27,11 @@
     border: none;
     padding: 10px 15px;
     font-size: 17px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
 }
 
 @media only screen and (max-width: 370px) {
@@ -37,10 +42,20 @@
     }
 }
 
+@media only screen and (max-width: 950px) {
+    .cardBody {
+        max-width: none !important;
+    }
+
+    .cardDescription .cardInformation {
+        flex-direction: column;
+    }
+}
+
 .showFavorites {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
 }
 
 .circle {
@@ -71,6 +86,15 @@
     margin-top: 100px;
 }
 
+.cardFavorite {
+    position: absolute;
+    margin: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 77px;
+    border: 3px solid white;
+}
+
 .activeFav {
     color: gold !important;
 }
@@ -85,6 +109,7 @@
     border: 1px solid #e0e0e0;
     border-radius: 6px;
     height: 140px;
+    max-width: 440px;
 
     .imageCard {
         width: 40%;
@@ -100,6 +125,17 @@
     .infoCard {
         width: 60%;
         padding: 10px;
+        cursor: pointer;
+
+        p, span, h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &:hover {
+            background-color: rgb(248, 248, 248);
+        }
     }
 }
 
@@ -163,6 +199,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        gap: 15px;
     }
 }
 

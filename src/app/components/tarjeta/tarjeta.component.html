@@ -1,8 +1,13 @@
 <div class="container">
     <div class="showFavorites">
-        <h3> Mostrar favoritos ({{this.listFavoritesCharacters.length}}): </h3>
-        <div class="circle" (click)="filterFavorites()">
-            <i class="pi pi-star-fill" [ngClass]="{'activeFav': favoriteButton}"></i>
+        <div class="flex align-items-center gap-2">
+            <h3> Mostrar favoritos ({{this.listFavoritesCharacters.length}}): </h3>
+            <div class="circle" (click)="filterFavorites()">
+                <i class="pi pi-star-fill" [ngClass]="{'activeFav': favoriteButton}"></i>
+            </div>
+        </div>
+        <div class="circle" (click)="clearFilters()" pTooltip="Borrar todos los filtros">
+            <i class="pi pi-trash"></i>
         </div>
     </div>
 
@@ -17,15 +22,15 @@
                 <span class="m-0 text-xs text-500 flex align-items-center gap-1">
                     <i class="pi pi-circle-fill" style="font-size: 8px"
                         [ngStyle]="{'color': char.status == 'Alive' ? '#27ae60' : '#eb5757'}"></i>
-                    <p class="m-0">{{char.status}} - {{char.species}}</p>
+                    <p class="m-0" title="{{char.status}} - {{char.species}}">{{char.status}} - {{char.species}}</p>
                 </span>
-                <h2 class="m-0 mb-1 text-base">{{char.name}}</h2>
+                <h2 class="m-0 mb-1 text-base" title="{{char.name}}">{{char.name}}</h2>
 
                 <span class="text-xs text-400">Last know location:</span>
-                <p class="m-0 mb-1 text-sm">{{char.location?.name}}</p>
+                <p class="m-0 mb-1 text-sm" title="{{char.location?.name}}">{{char.location?.name}}</p>
 
                 <span class="text-xs text-400">First seen in:</span>
-                <p class="m-0 text-sm">{{char.origin?.name}}</p>
+                <p class="m-0 text-sm" title="{{char.origin?.name}}">{{char.origin?.name}}</p>
             </div>
         </div>
 
@@ -44,6 +49,10 @@
         <div class="cardBlackScreen"></div>
         <div class="cardContainerAvatar">
             <img src="{{characterSelected.image}}" alt="Avatar del Cliente" class="cardAvatar">
+        </div>
+        <div class="circle circleCard cardFavorite"
+            (click)="characterSelected.favorite = !characterSelected.favorite;addToFavorite(characterSelected)">
+            <i class="pi pi-star-fill" [ngClass]="{'activeFav': characterSelected.favorite}"></i>
         </div>
         <div class="cardTtile">
             <p class="text-500 text-sm">{{characterSelected.status}}</p>
@@ -81,7 +90,47 @@
                     <p title="{{charSel.episode}}">{{charSel.episode}}</p>
                     <span title="{{charSel.created | formatoFecha}}">{{charSel.created | formatoFecha}}</span>
                 </div>
+
+                <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+                    animationDuration=".5s" *ngIf="characterSelected['listEpisodes'] == undefined"></p-progressSpinner>
             </section>
+
+            <br>
+            <p-divider></p-divider>
+
+            <h1 class="text-800 text-left">Personajes interesantes</h1>
+
+            <div class="girdListCharacters">
+                <div class="cardBody" *ngFor="let char of characters; let i = index"
+                    [ngStyle]="{'display': i > 1  ? 'none' : ''}">
+                    <div class="imageCard" [ngStyle]="{'background-image': 'url(' + char.image + ')'}">
+                        <div class="circle circleCard" (click)="char.favorite = !char.favorite;addToFavorite(char)">
+                            <i class="pi pi-star-fill" [ngClass]="{'activeFav': char.favorite}"></i>
+                        </div>
+                    </div>
+
+                    <div class="infoCard text-left" (click)="showDialog(char)">
+                        <span class="m-0 text-xs text-500 flex align-items-center gap-1">
+                            <i class="pi pi-circle-fill" style="font-size: 8px"
+                                [ngStyle]="{'color': char.status == 'Alive' ? '#27ae60' : '#eb5757'}"></i>
+                            <p class="m-0" title="{{char.status}} - {{char.species}}">{{char.status}} - {{char.species}}
+                            </p>
+                        </span>
+                        <h2 class="m-0 mb-1 text-base" title="{{char.name}}">{{char.name}}</h2>
+
+                        <span class="text-xs text-400">Last know location:</span>
+                        <p class="m-0 mb-1 text-sm" title="{{char.location?.name}}">{{char.location?.name}}</p>
+
+                        <span class="text-xs text-400">First seen in:</span>
+                        <p class="m-0 text-sm" title="{{char.origin?.name}}">{{char.origin?.name}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <button class="clearFilters" style="float: right;"><a class="text-white no-underline"
+                    href="mailto:correo@example.com">Compartir personaje</a></button>
+            <br><br><br>
         </article>
     </div>
 </p-dialog>

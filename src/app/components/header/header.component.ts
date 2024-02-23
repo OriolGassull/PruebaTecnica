@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-
+import { TarjetaService } from '../../services/tarjeta.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +8,17 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private subscription?: Subscription;
+  
+  constructor(private apiService: TarjetaService) {}
+
   searchTerm: string = '';
   tabValue: string = '?All';
   activeIndex: number = 0;
   filters = ['name','status','species','type','gender'];
   opcionesSeleccionadas: string[] = []
-  
+  checkboxState: { [key: string]: boolean } = {};
+
   @Output() search = new EventEmitter<string>();
 
   searchCharacters() {
@@ -26,6 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onCheckboxChange(filtro: string) {
+    this.checkboxState[filtro] = !this.checkboxState[filtro];
     let indice = this.opcionesSeleccionadas.findIndex(function(objeto: any){return objeto === filtro});
 
     if(indice !== -1) {
@@ -35,13 +42,28 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  seleccionarCategoria(texto: string) {
+  selectCategory(texto: string) {
     this.tabValue = texto;
     this.searchTerm = '';
+    this.opcionesSeleccionadas = [];
     this.search.emit(texto);
   }
 
-  ngOnInit(): void {
-    this.seleccionarCategoria(this.tabValue);
+  ngOnInit() {
+    this.selectCategory(this.tabValue);
+
+    this.subscription = this.apiService.getSharedVar().subscribe(
+      (nuevoValor: any) => {
+        if(nuevoValor) {
+          this.searchTerm = '';
+          this.checkboxState = {};
+          this.opcionesSeleccionadas = [];
+        }
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 }

@@ -13,6 +13,8 @@ import { DialogModule } from 'primeng/dialog';
 import { formatDatePipe } from './pipes/formats-Dates.pipe';
 import { DividerModule } from 'primeng/divider';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -30,14 +32,18 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     DialogModule,
     BrowserAnimationsModule,
     DividerModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ProgressSpinnerModule,
+    TooltipModule
   ],  
   exports: [
     FormsModule,
     CardModule,
     DialogModule,
     DividerModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ProgressSpinnerModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

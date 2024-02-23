@@ -64,10 +64,10 @@
             border: 0;
             height: 55px;
             width: 60px;
-            cursor: pointer;
             color: white;
-
-            &:hover {
+            
+            &:not([disabled]):hover {
+                cursor: pointer;
                opacity: 0.95;
             }
 
