@@ -13,7 +13,18 @@ export class AppComponent {
   constructor(private apiService: TarjetaService) { }
 
   searchCharacters(searchTerm: string) {
-    this.characters = this.apiService.getCharacters(searchTerm);
+    var episodios = [];
+
+    this.apiService.getCharacters(searchTerm).subscribe(
+      (response) => {
+        this.characters = response.results;
+        console.log(this.characters)
+      },
+      (error) => {
+        this.characters = [];
+        console.error('Error al obtener datos de la API:', error);
+      }
+    );
     console.log(this.characters)
   }
 }
