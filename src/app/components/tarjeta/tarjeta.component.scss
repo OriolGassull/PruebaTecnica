@@ -16,8 +16,18 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(326px, 1fr));
     gap: 15px;
+    min-height: 70vh;
 }
 
+.clearFilters {
+    background-color:#11555F;
+    color: #fff;
+    border-radius: 60px;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    font-size: 17px;
+}
 
 @media only screen and (max-width: 370px) {
     .girdListCharacters {
@@ -80,7 +90,7 @@
         width: 40%;
         border-top-left-radius: 6px;
         border-bottom-left-radius: 6px;
-        background-image: url(../../../assets/img/headerBG2.png);
+        // background-image: url(../../../assets/img/headerBG2.png);
         height: inherit;
         background-repeat: no-repeat;
         background-size: cover;
@@ -90,5 +100,126 @@
     .infoCard {
         width: 60%;
         padding: 10px;
+    }
+}
+
+.cardProfileHeader {
+    position: relative;
+    text-align: center;
+
+    .cardBackground {
+        background-image: url(../../../assets/img/cardBG.png);
+        background-size: cover;
+        height: 240px;
+        width: 100%;
+    }
+
+    .cardBlackScreen {
+        background-color: black;
+        opacity: 0.4;
+        position: absolute;
+        top: 0;
+        height: 240px;
+        width: 100%;
+    }
+    
+    .cardContainerAvatar {
+        position: absolute;
+        top: 240px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid #fff;
+        width: 163px;
+        height: 163px;
+    
+        .cardAvatar {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: -1px;
+        }
+    }
+    
+    .cardTtile {
+        background-color: whitesmoke;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+
+        p {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.cardDescription {
+    padding: 0 20px;
+
+    .cardInformation {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.cardEpisodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.cardInformationChild {
+    border-radius: 8px;
+    min-width: 100px;
+    border: 1px solid #BDBDBD;
+    text-align: left;
+    padding: 6px 10px 10px 10px;
+    min-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    span {
+        font-size: 13px;
+        white-space: nowrap;
+
+        i {
+            font-size: 12px;
+            background-color: gray;
+            border-radius: 50%;
+            color: #fff;
+        }
+    }
+
+    p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 17px;
+        color: #081F32;
+    }
+}
+
+
+::ng-deep {
+    .p-dialog .p-dialog-header {
+        border-radius: 50%;
+        border-bottom: 0 none;
+        background: #ffffff;
+        color: transparent;
+        border-top-right-radius: 50%;
+        border-top-left-radius: 50%;
+        position: absolute;
+        z-index: 1;
+        padding: 0;
+        right: 30px;
+        top: 10px;
+    }
+
+    .p-dialog .p-dialog-content {
+        padding: 0;
     }
 }

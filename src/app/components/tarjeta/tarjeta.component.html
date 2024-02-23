@@ -1,6 +1,6 @@
 <div class="container">
     <div class="showFavorites">
-        <h3> Mostrar favoritos: </h3>
+        <h3> Mostrar favoritos ({{this.listFavoritesCharacters.length}}): </h3>
         <div class="circle" (click)="filterFavorites()">
             <i class="pi pi-star-fill" [ngClass]="{'activeFav': favoriteButton}"></i>
         </div>
@@ -8,21 +8,80 @@
 
     <div class="girdListCharacters">
         <div class="cardBody" *ngFor="let char of characters">
-            <div class="imageCard">
-                <div class="circle circleCard" (click)="filterFavorites()">
-                    <i class="pi pi-star-fill" [ngClass]="{'activeFav': favoriteButton}"></i>
+            <div class="imageCard" [ngStyle]="{'background-image': 'url(' + char.image + ')'}">
+                <div class="circle circleCard" (click)="char.favorite = !char.favorite;addToFavorite(char)">
+                    <i class="pi pi-star-fill" [ngClass]="{'activeFav': char.favorite}"></i>
                 </div>
             </div>
-            <div class="infoCard">
-                <span class="m-0 text-xs text-500">Alive-Human</span>
-                <h2 class="m-0 mb-1 text-base">Morty Smith</h2>
+            <div class="infoCard" (click)="showDialog(char)">
+                <span class="m-0 text-xs text-500 flex align-items-center gap-1">
+                    <i class="pi pi-circle-fill" style="font-size: 8px"
+                        [ngStyle]="{'color': char.status == 'Alive' ? '#27ae60' : '#eb5757'}"></i>
+                    <p class="m-0">{{char.status}} - {{char.species}}</p>
+                </span>
+                <h2 class="m-0 mb-1 text-base">{{char.name}}</h2>
 
                 <span class="text-xs text-400">Last know location:</span>
-                <p class="m-0 mb-1 text-sm">Story Train</p>
+                <p class="m-0 mb-1 text-sm">{{char.location?.name}}</p>
 
                 <span class="text-xs text-400">First seen in:</span>
-                <p class="m-0 text-sm">Never Ricking Morty</p>
+                <p class="m-0 text-sm">{{char.origin?.name}}</p>
             </div>
+        </div>
+
+        <div *ngIf="characters.length == 0" class="text-center mt-5">
+            <h1>Uh-oh!</h1>
+            <p class="text-500">¡Pareces perdido en tu viaje!</p>
+            <button class="clearFilters" (click)="clearFilters()">Eliminar filtros</button>
         </div>
     </div>
 </div>
+
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [draggable]="false">
+    <div class="cardProfileHeader">
+        <div class="cardBackground"></div>
+        <div class="cardBlackScreen"></div>
+        <div class="cardContainerAvatar">
+            <img src="{{characterSelected.image}}" alt="Avatar del Cliente" class="cardAvatar">
+        </div>
+        <div class="cardTtile">
+            <p class="text-500 text-sm">{{characterSelected.status}}</p>
+            <h2 class="m-0 text-xl">{{characterSelected.name}}</h2>
+            <p class="text-500 text-sm">{{characterSelected.species}}</p>
+        </div>
+
+        <article class="cardDescription">
+
+            <h1 class="text-800 text-left">Informacion</h1>
+
+            <section class="cardInformation">
+                <div class="cardInformationChild">
+                    <span><i class="pi pi-info-circle"></i> Gender:</span>
+                    <p>{{characterSelected.gender}}</p>
+                </div>
+                <div class="cardInformationChild">
+                    <span><i class="pi pi-info-circle"></i> Origin:</span>
+                    <p>{{characterSelected.origin?.name}}</p>
+                </div>
+                <div class="cardInformationChild">
+                    <span><i class="pi pi-info-circle"></i> Type:</span>
+                    <p>{{characterSelected.type}}</p>
+                </div>
+            </section>
+
+            <br>
+            <p-divider></p-divider>
+
+            <h1 class="text-800 text-left">Episodios</h1>
+
+            <section class="cardEpisodes">
+                <div class="cardInformationChild" *ngFor="let charSel of characterSelected.listEpisodes">
+                    <span title="{{charSel.name}}">{{charSel.name}}</span>
+                    <p title="{{charSel.episode}}">{{charSel.episode}}</p>
+                    <span title="{{charSel.created | formatoFecha}}">{{charSel.created | formatoFecha}}</span>
+                </div>
+            </section>
+        </article>
+    </div>
+</p-dialog>

@@ -7,29 +7,38 @@
     <div class="searcherTarjeta">
       <button (click)="searchCharacters()"><i class="pi pi-search"></i></button>
       <input type="text" placeholder="Buscar personaje..." [(ngModel)]="searchTerm" />
-      <button><i class="pi pi-sliders-h"></i></button>
+      <button (click)="op.toggle($event)"
+        style="border-top-right-radius: 6px;border-bottom-right-radius: 6px;margin-right: 2.5px;"><i
+          class="pi pi-sliders-h"></i></button>
+      <p-overlayPanel #op>
+        <div class="checkbox-container" *ngFor="let filt of filters">
+          <input type="checkbox" id="checkbox{{filt}}" class="custom-checkbox" (change)="onCheckboxChange(filt)">
+          <label for="checkbox{{filt}}" class="checkbox-label">{{filt}}</label>
+        </div>
+      </p-overlayPanel>
     </div>
     <div class="filtersSearch">
       <b>Filtros aplicados: </b>
-      <p class="m-0">Status, Origin</p>
+      <p class="m-0">{{opcionesSeleccionadas.toString()}}</p>
     </div>
   </div>
 </header>
 <nav>
   <ul>
-    <li (click)="seleccionarCategoria('All')" [ngClass]="{'activeTab': tabValue == 'All'}">
+    <li (click)="seleccionarCategoria('?All')" [ngClass]="{'activeTab': tabValue == '?All'}">
       <span>All</span>
     </li>
-    <li (click)="seleccionarCategoria('Unknow')" [ngClass]="{'activeTab': tabValue == 'Unknow'}">
+    <li (click)="seleccionarCategoria('?gender=unknow')" [ngClass]="{'activeTab': tabValue == '?gender=unknow'}">
       <span>Unknow</span>
     </li>
-    <li (click)="seleccionarCategoria('Female')" [ngClass]="{'activeTab': tabValue == 'Female'}">
+    <li (click)="seleccionarCategoria('?gender=female')" [ngClass]="{'activeTab': tabValue == '?gender=female'}">
       <span>Female</span>
     </li>
-    <li (click)="seleccionarCategoria('Male')" [ngClass]="{'activeTab': tabValue == 'Male'}">
+    <li (click)="seleccionarCategoria('?gender=male')" [ngClass]="{'activeTab': tabValue == '?gender=male'}">
       <span>Male</span>
     </li>
-    <li (click)="seleccionarCategoria('Genderless')" [ngClass]="{'activeTab': tabValue == 'Genderless'}">
+    <li (click)="seleccionarCategoria('?gender=genderless')"
+      [ngClass]="{'activeTab': tabValue == '?gender=genderless'}">
       <span>Genderless</span>
     </li>
   </ul>
